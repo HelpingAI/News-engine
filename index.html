@@ -4,46 +4,303 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoHive - News Search</title>
-    <meta name="description" content="InfoHive is a news search engine that provides the latest updates on technology, sports, and more.">
-    <meta property="og:title" content="InfoHive - News Search">
-    <meta name="google-adsense-account" content="ca-pub-2037644167417212">
-    <meta property="og:description" content="InfoHive is a news search engine that provides the latest updates on technology, sports, and more.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/OE-LUCIFER/HelpingAI-vortex3b/main/techscout.jpeg">
-    <meta property="og:url" content="https://abhaykoul-infohive.hf.space/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* Reset default margins and paddings */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body {
+            font-family: Arial, sans-serif;
         }
-        /* Style for the iframe */
-        iframe {
-            width: 100%; /* Full width */
-            height: 100vh; /* Full viewport height */
-            border: none; /* Remove border */
-            position: absolute; /* Absolute positioning */
-            top: 0; /* Stick to the top */
-            left: 0; /* Stick to the left */
+        #newsContainer {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+       .loading-indicator {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+       .loading-indicator img {
+            width: 64px;
+            height: 64px;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            padding-top: 50px;
+        }
+        .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            padding: 2rem 2rem;
+            margin-bottom: 30px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .card-text {
+            color: #666;
+            font-weight: bold; /* Add this line to make the text bold */
+        }
+        .card-footer {
+            background-color: #f9f9f9;
+            border-top: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-outline-primary {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .no-results {
+            text-align: center;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        .search-input {
+            border-radius: 24px;
+        }
+        .logo {
+            max-width: 200px;
+        }
+        .subscribe-btn {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+        .subscribe-btn:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
+        /* Dark Mode Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #161515;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1f1d1d;
+            color: #07db23;
+        }
+        body.dark-mode .jumbotron {
+            background-color: #004085;
+        }
+        body.dark-mode .card {
+            background-color: hsl(144, 13%, 92%);
+            color: #f8f9fa;
+        }
+        body.dark-mode .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        body.dark-mode .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        body.dark-mode .btn-outline-primary {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        body.dark-mode .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        body.dark-mode .subscribe-btn {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+        body.dark-mode .subscribe-btn:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
         }
     </style>
-    <!-- Google AdSense script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2037644167417212"
-            crossorigin="anonymous"></script>
 </head>
 <body>
-<iframe src="https://abhaykoul-infohive.hf.space/" allowfullscreen></iframe>
-<!-- Ad -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2037644167417212"
-     data-ad-slot="3059435619"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    <div class="container">
+        <div class="jumbotron">
+            <img src="https://raw.githubusercontent.com/OE-LUCIFER/HelpingAI-vortex3b/main/techscout.jpeg" alt="Techscout Logo" class="img-fluid mx-auto d-block mb-4 logo">
+            <h1 class="display-4 text-center mb-4">Explore the Latest News</h1>
+            <p class="lead text-center">InfoHive is your source for up-to-date news on technology, sports, and more.</p>
+            <div class="text-center">
+                <a href="https://youtube.com/@OEvortex" class="btn btn-primary subscribe-btn" target="_blank">Subscribe to OEvortex on YouTube</a>
+            </div>
+            <!-- Dark Mode Toggle -->
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="newsForm" method="GET" action="#" autocomplete="off">
+                    <div class="form-row">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control search-input" name="keywords" placeholder="Enter keywords" value="Latest AI news">
+                        </div>
+                        <div class="col-md-2">
+                            <select name="timelimit" class="form-control search-input">
+                                <option value="d">Day</option>
+                                <option value="w">Week</option>
+                                <option value="m">Month</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="newsContainer" class="mt-4"></div>
+        <div id="loadingIndicator" class="loading-indicator">
+            <img src="https://raw.githubusercontent.com/OEvortex/News-engine/main/icons8-loading-circle.gif" alt="Loading...">
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Dark Mode Toggle Script -->
+    <script>
+       document.getElementById('darkModeToggle').addEventListener('change', function() {
+           document.body.classList.toggle('dark-mode', this.checked);
+       });
+    </script>
+    <!-- JavaScript for handling form submission and API call -->
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            performInitialSearch();
+        });
+
+        function performInitialSearch() {
+            const formData = new FormData(document.getElementById('newsForm'));
+            const url = 'https://oevortex-webscout.hf.space/api/news';
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // Show loading indicator
+            <!-- loadingIndicator.style.display = 'block'; -->
+
+            // Construct the query string
+            const queryString = new URLSearchParams({
+                q: formData.get('keywords'),
+                max_results: '100',
+                safesearch: 'off',
+                region: 'wt-wt',
+                timelimit: formData.get('timelimit')
+            }).toString();
+
+            fetch(url + '?' + queryString)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("API Response:", data);
+
+                    // Hide loading indicator
+                    <!-- loadingIndicator.style.display = 'none'; -->
+
+                    // Clear previous news items
+                    const newsContainer = document.getElementById('newsContainer');
+                    newsContainer.innerHTML = '';
+
+                    // Display news items
+                    if (data && Array.isArray(data.results)) {
+                        data.results.forEach(result => {
+                            const articleElement = `
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="${result.image}" class="card-img-top" alt="${result.title}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${result.title}</h5>
+                                            <p class="card-text small text-muted">
+                                                ${result.date} - ${result.source}
+                                            </p>
+                                            <p class="card-text">${result.body}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="${result.url}" class="btn btn-outline-primary btn-sm" target="_blank">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            newsContainer.innerHTML += articleElement;
+                        });
+                    } else {
+                        newsContainer.innerHTML = '<p class="no-results">No results found.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching news:', error);
+                    // Optionally hide loading indicator after failure
+                    <!-- loadingIndicator.style.display = 'none'; -->
+                });
+        }
+    </script>
 </body>
 </html>
