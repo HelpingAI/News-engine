@@ -6,178 +6,173 @@
     <title>InfoHive - News Search</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-            }
-            #newsContainer {
-                margin-top: 20px;
-                display: flex;
-                flex-wrap: wrap;
-            }
-           .loading-indicator {
-                display: none; /* Hidden by default */
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 9999;
-            }
-           .loading-indicator img {
-                width: 64px;
-                height: 64px;
-            }
-            body {
-                font-family: 'Arial', sans-serif;
-                background-color: #f8f9fa;
-                color: #333;
-            }
-            .container {
-                padding-top: 50px;
-            }
-            .jumbotron {
-                background-color: #007bff;
-                color: #fff;
-                padding: 2rem 2rem;
-                margin-bottom: 30px;
-            }
-            .card {
-                border: none;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s;
-            }
-            .card:hover {
-                transform: translateY(-5px);
-            }
-            .card-title {
-                font-size: 20px;
-                font-weight: bold;
-                color: #333;
-            }
-            .card-text {
-                color: #666;
-                font-weight: bold; /* Add this line to make the text bold */
-            }
-            .card-footer {
-                background-color: #f9f9f9;
-                border-top: none;
-            }
-            .btn-primary {
-                background-color: #007bff;
-                border-color: #007bff;
-            }
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-            .btn-outline-primary {
-                color: #007bff;
-                border-color: #007bff;
-            }
-            .btn-outline-primary:hover {
-                background-color: #007bff;
-                color: #fff;
-            }
-            .no-results {
-                text-align: center;
-                font-style: italic;
-                margin-top: 20px;
-            }
-            .search-input {
-                border-radius: 24px;
-            }
-            .logo {
-                max-width: 200px;
-            }
-            .subscribe-btn {
-                background-color: #ff0000;
-                border-color: #ff0000;
-            }
-            .subscribe-btn:hover {
-                background-color: #cc0000;
-                border-color: #cc0000;
-            }
-            /* Dark Mode Toggle */
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #161515;
-                transition: .4s;
-            }
-            .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                transition: .4s;
-            }
-            input:checked + .slider {
-                background-color: #2196F3;
-            }
-            input:checked + .slider:before {
-                transform: translateX(26px);
-            }
-            .slider.round {
-                border-radius: 34px;
-            }
-            .slider.round:before {
-                border-radius: 50%;
-            }
-            /* Dark Mode Styles */
-            body.dark-mode {
-                background-color: #1f1d1d;
-                color: #07db23;
-            }
-            body.dark-mode .jumbotron {
-                background-color: #004085;
-            }
-            body.dark-mode .card {
-                background-color: hsl(144, 13%, 92%);
-                color: #f8f9fa;
-            }
-            body.dark-mode .btn-primary {
-                background-color: #007bff;
-                border-color: #007bff;
-            }
-            body.dark-mode .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-            body.dark-mode .btn-outline-primary {
-                color: #007bff;
-                border-color: #007bff;
-            }
-            body.dark-mode .btn-outline-primary:hover {
-                background-color: #007bff;
-                color: #fff;
-            }
-            body.dark-mode .subscribe-btn {
-                background-color: #ff0000;
-                border-color: #ff0000;
-            }
-            body.dark-mode .subscribe-btn:hover {
-                background-color: #cc0000;
-                border-color: #cc0000;
-            }
-        </style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        #newsContainer {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+       .loading-indicator {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+       .loading-indicator img {
+            width: 64px;
+            height: 64px;
+        }
+       .container {
+            padding-top: 50px;
+        }
+       .jumbotron {
+            background-color: #007bff;
+            color: #fff;
+            padding: 2rem 2rem;
+            margin-bottom: 30px;
+        }
+       .card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+       .card:hover {
+            transform: translateY(-5px);
+        }
+       .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+       .card-text {
+            color: #666;
+            font-weight: bold;
+        }
+       .card-footer {
+            background-color: #f9f9f9;
+            border-top: none;
+        }
+       .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+       .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+       .btn-outline-primary {
+            color: #007bff;
+            border-color: #007bff;
+        }
+       .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+       .no-results {
+            text-align: center;
+            font-style: italic;
+            margin-top: 20px;
+        }
+       .search-input {
+            border-radius: 24px;
+        }
+       .logo {
+            max-width: 200px;
+        }
+       .subscribe-btn {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+       .subscribe-btn:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
+        /* Dark Mode Toggle */
+       .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+       .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+       .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #161515;
+            transition:.4s;
+        }
+       .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition:.4s;
+        }
+        input:checked +.slider {
+            background-color: #2196F3;
+        }
+        input:checked +.slider:before {
+            transform: translateX(26px);
+        }
+       .slider.round {
+            border-radius: 34px;
+        }
+       .slider.round:before {
+            border-radius: 50%;
+        }
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1f1d1d;
+            color: #07db23;
+        }
+        body.dark-mode.jumbotron {
+            background-color: #004085;
+        }
+        body.dark-mode.card {
+            background-color: hsl(144, 13%, 92%);
+            color: #f8f9fa;
+        }
+        body.dark-mode.btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        body.dark-mode.btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        body.dark-mode.btn-outline-primary {
+            color: #007bff;
+            border-color: #007bff;
+        }
+        body.dark-mode.btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        body.dark-mode.subscribe-btn {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+        body.dark-mode.subscribe-btn:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
     </style>
 </head>
 <body>
@@ -250,7 +245,7 @@
             const loadingIndicator = document.getElementById('loadingIndicator');
 
             // Show loading indicator
-            <!-- loadingIndicator.style.display = 'block'; -->
+            loadingIndicator.style.display = 'block';
 
             // Construct the query string
             const queryString = new URLSearchParams({
@@ -262,24 +257,24 @@
             }).toString();
 
             fetch(url + '?' + queryString)
-                .then(response => {
+               .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error status: ${response.status}`);
                     }
                     return response.json();
                 })
-                .then(data => {
+               .then(data => {
                     console.log("API Response:", data);
-                
+
                     // Hide loading indicator
                     loadingIndicator.style.display = 'none';
-                
+
                     // Clear previous news items
                     const newsContainer = document.getElementById('newsContainer');
                     newsContainer.innerHTML = '';
-                
+
                     // Display news items
-                    if (data && Array.isArray(data.data)) { // Adjusted to check data.data instead of data.results
+                    if (data && Array.isArray(data.data)) {
                         data.data.forEach(result => {
                             const articleElement = `
                                 <div class="col-md-4 mb-4">
@@ -304,12 +299,14 @@
                         newsContainer.innerHTML = '<p class="no-results">No results found.</p>';
                     }
                 })
-                .catch(error => {
+               .catch(error => {
                     console.error('Error fetching news:', error);
                     // Optionally hide loading indicator after failure
                     loadingIndicator.style.display = 'none';
                 });
         }
     </script>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2037644167417212" crossorigin="anonymous"></script>
 </body>
 </html>
