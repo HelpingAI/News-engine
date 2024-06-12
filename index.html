@@ -270,21 +270,21 @@
                 })
                 .then(data => {
                     console.log("API Response:", data);
-
+                
                     // Hide loading indicator
                     loadingIndicator.style.display = 'none';
-
+                
                     // Clear previous news items
                     const newsContainer = document.getElementById('newsContainer');
                     newsContainer.innerHTML = '';
-
+                
                     // Display news items
-                    if (data && Array.isArray(data.results)) {
-                        data.results.forEach(result => {
+                    if (data && Array.isArray(data.data)) { // Adjusted to check data.data instead of data.results
+                        data.data.forEach(result => {
                             const articleElement = `
                                 <div class="col-md-4 mb-4">
                                     <div class="card">
-                                        <img src="${result.image}" class="card-img-top" alt="${result.title}">
+                                        <img src="${result.image || 'default-image-url.jpg'}" class="card-img-top" alt="${result.title}">
                                         <div class="card-body">
                                             <h5 class="card-title">${result.title}</h5>
                                             <p class="card-text small text-muted">
