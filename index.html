@@ -274,8 +274,8 @@
                     newsContainer.innerHTML = '';
 
                     // Display news items
-                    if (data && Array.isArray(data.data)) {
-                        data.data.forEach(result => {
+                    if (data && Array.isArray(data)) {
+                        data.forEach(result => {
                             const articleElement = `
                                 <div class="col-md-4 mb-4">
                                     <div class="card">
