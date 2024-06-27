@@ -5,117 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoHive - News Search</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --card-background: #fff;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
-        #newsContainer {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-        }
-       .loading-indicator {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-        }
-       .loading-indicator img {
-            width: 64px;
-            height: 64px;
-        }
-       .container {
+        .container {
             padding-top: 50px;
         }
-       .jumbotron {
-            background-color: #007bff;
+        .jumbotron {
+            background-color: var(--primary-color);
             color: #fff;
-            padding: 2rem 2rem;
+            padding: 2rem;
             margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-       .card {
+        .card {
             border: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--card-background);
         }
-       .card:hover {
+        .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-       .card-title {
+        .card-title {
             font-size: 20px;
             font-weight: bold;
-            color: #333;
+            color: var(--text-color);
         }
-       .card-text {
-            color: #666;
-            font-weight: bold;
+        .card-text {
+            color: var(--secondary-color);
         }
-       .card-footer {
-            background-color: #f9f9f9;
+        .card-footer {
+            background-color: rgba(0, 0, 0, 0.03);
             border-top: none;
         }
-       .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: background-color 0.3s, border-color 0.3s;
         }
-       .btn-primary:hover {
+        .btn-primary:hover {
             background-color: #0056b3;
             border-color: #0056b3;
         }
-       .btn-outline-primary {
-            color: #007bff;
-            border-color: #007bff;
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
-       .btn-outline-primary:hover {
-            background-color: #007bff;
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
             color: #fff;
         }
-       .no-results {
-            text-align: center;
-            font-style: italic;
-            margin-top: 20px;
-        }
-       .search-input {
+        .search-input {
             border-radius: 24px;
+            padding: 10px 20px;
         }
-       .logo {
+        .logo {
             max-width: 200px;
+            transition: transform 0.3s;
         }
-       .subscribe-btn {
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .subscribe-btn {
             background-color: #ff0000;
             border-color: #ff0000;
+            transition: background-color 0.3s, border-color 0.3s;
         }
-       .subscribe-btn:hover {
+        .subscribe-btn:hover {
             background-color: #cc0000;
             border-color: #cc0000;
         }
-        /* Dark Mode Toggle */
-       .switch {
+        .switch {
             position: relative;
             display: inline-block;
             width: 60px;
             height: 34px;
+            margin-left: 20px;
         }
-       .switch input {
+        .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
-       .slider {
+        .slider {
             position: absolute;
             cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #161515;
-            transition:.4s;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
         }
-       .slider:before {
+        .slider:before {
             position: absolute;
             content: "";
             height: 26px;
@@ -123,55 +125,54 @@
             left: 4px;
             bottom: 4px;
             background-color: white;
-            transition:.4s;
-        }
-        input:checked +.slider {
-            background-color: #2196F3;
-        }
-        input:checked +.slider:before {
-            transform: translateX(26px);
-        }
-       .slider.round {
-            border-radius: 34px;
-        }
-       .slider.round:before {
+            transition: .4s;
             border-radius: 50%;
         }
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #1f1d1d;
-            color: #07db23;
+        input:checked + .slider {
+            background-color: #2196F3;
         }
-        body.dark-mode.jumbotron {
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        body.dark-mode {
+            --background-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --card-background: #2c2c2c;
+            --card-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+        body.dark-mode .jumbotron {
             background-color: #004085;
         }
-        body.dark-mode.card {
-            background-color: hsl(144, 13%, 92%);
-            color: #f8f9fa;
+        body.dark-mode .btn-outline-primary {
+            color: #4da3ff;
+            border-color: #4da3ff;
         }
-        body.dark-mode.btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+        body.dark-mode .btn-outline-primary:hover {
+            background-color: #4da3ff;
+            color: #1a1a1a;
         }
-        body.dark-mode.btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+        .source-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
-        body.dark-mode.btn-outline-primary {
-            color: #007bff;
-            border-color: #007bff;
+        #loadMore {
+            display: none;
+            margin: 20px auto;
         }
-        body.dark-mode.btn-outline-primary:hover {
-            background-color: #007bff;
-            color: #fff;
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
         }
-        body.dark-mode.subscribe-btn {
-            background-color: #ff0000;
-            border-color: #ff0000;
+        .fade-in {
+            animation: fadeIn 0.5s;
         }
-        body.dark-mode.subscribe-btn:hover {
-            background-color: #cc0000;
-            border-color: #cc0000;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -182,13 +183,14 @@
             <h1 class="display-4 text-center mb-4">Explore the Latest News</h1>
             <p class="lead text-center">InfoHive is your source for up-to-date news on technology, sports, and more.</p>
             <div class="text-center">
-                <a href="https://youtube.com/@OEvortex" class="btn btn-primary subscribe-btn" target="_blank">Subscribe to OEvortex on YouTube</a>
+                <a href="https://youtube.com/@OEvortex" class="btn btn-primary subscribe-btn" target="_blank">
+                    <i class="fab fa-youtube mr-2"></i>Subscribe to OEvortex on YouTube
+                </a>
+                <label class="switch ml-3">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider round"></span>
+                </label>
             </div>
-            <!-- Dark Mode Toggle -->
-            <label class="switch">
-                <input type="checkbox" id="darkModeToggle">
-                <span class="slider round"></span>
-            </label>
         </div>
         <div class="card mb-4">
             <div class="card-body">
@@ -204,34 +206,55 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" id="searchButton" class="btn btn-primary btn-block">Search</button>
+                        <button type="button" id="searchButton" class="btn btn-primary btn-block">
+                            <i class="fas fa-search mr-2"></i>Search
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="newsContainer" class="mt-4"></div>
-        <div id="loadingIndicator" class="loading-indicator">
-            <img src="https://raw.githubusercontent.com/OEvortex/News-engine/main/icons8-loading-circle.gif" alt="Loading...">
-        </div>
+        <div id="newsContainer" class="row mt-4"></div>
+        <button id="loadMore" class="btn btn-primary">Load More</button>
     </div>
-    <!-- Bootstrap JS -->
+    <a href="#" class="back-to-top btn btn-primary">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Dark Mode Toggle Script -->
     <script>
-       document.getElementById('darkModeToggle').addEventListener('change', function() {
-           document.body.classList.toggle('dark-mode', this.checked);
-       });
-    </script>
-    <!-- JavaScript for handling form submission and API call -->
-    <script>
+        let allNews = [];
+        let displayedNews = 0;
+        const newsPerPage = 9;
+
+        document.getElementById('darkModeToggle').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', this.checked);
+            localStorage.setItem('darkMode', this.checked);
+        });
+
         window.addEventListener('DOMContentLoaded', (event) => {
+            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+            document.getElementById('darkModeToggle').checked = darkModeEnabled;
+            document.body.classList.toggle('dark-mode', darkModeEnabled);
             performInitialSearch();
         });
 
-        document.getElementById('searchButton').addEventListener('click', function() {
-            performSearch();
+        document.getElementById('searchButton').addEventListener('click', performSearch);
+        document.getElementById('searchKeywords').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        document.getElementById('loadMore').addEventListener('click', displayMoreNews);
+
+        window.addEventListener('scroll', function() {
+            var backToTopButton = document.querySelector('.back-to-top');
+            backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+        });
+
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         function performInitialSearch() {
@@ -242,12 +265,7 @@
             const searchKeywords = document.getElementById('searchKeywords').value;
             const searchTimeLimit = document.getElementById('searchTimeLimit').value;
             const url = 'https://oevortex-webscout-api.hf.space/api/news';
-            const loadingIndicator = document.getElementById('loadingIndicator');
 
-            // Show loading indicator
-            loadingIndicator.style.display = 'none';
-
-            // Construct the query string
             const queryString = new URLSearchParams({
                 q: searchKeywords,
                 max_results: '100',
@@ -257,56 +275,56 @@
             }).toString();
 
             fetch(url + '?' + queryString)
-               .then(response => {
+                .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error status: ${response.status}`);
                     }
                     return response.json();
                 })
-               .then(data => {
+                .then(data => {
                     console.log("API Response:", data);
-
-                    // Hide loading indicator
-                    loadingIndicator.style.display = 'none';
-
-                    // Clear previous news items
-                    const newsContainer = document.getElementById('newsContainer');
-                    newsContainer.innerHTML = '';
-
-                    // Display news items
-                    if (data && Array.isArray(data)) {
-                        data.forEach(result => {
-                            const articleElement = `
-                                <div class="col-md-4 mb-4">
-                                    <div class="card">
-                                        <img src="${result.image || 'default-image-url.jpg'}" class="card-img-top" alt="${result.title}">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${result.title}</h5>
-                                            <p class="card-text small text-muted">
-                                                ${result.date} - ${result.source}
-                                            </p>
-                                            <p class="card-text">${result.body}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="${result.url}" class="btn btn-outline-primary btn-sm" target="_blank">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            newsContainer.innerHTML += articleElement;
-                        });
-                    } else {
-                        newsContainer.innerHTML = '<p class="no-results">No results found.</p>';
-                    }
+                    allNews = data;
+                    displayedNews = 0;
+                    document.getElementById('newsContainer').innerHTML = '';
+                    displayMoreNews();
                 })
-               .catch(error => {
+                .catch(error => {
                     console.error('Error fetching news:', error);
-                    // Optionally hide loading indicator after failure
-                    loadingIndicator.style.display = 'none';
+                    document.getElementById('newsContainer').innerHTML = '<p class="col-12 text-center">Error fetching news. Please try again later.</p>';
                 });
         }
+
+        function displayMoreNews() {
+            const newsContainer = document.getElementById('newsContainer');
+            const endIndex = Math.min(displayedNews + newsPerPage, allNews.length);
+            
+            for (let i = displayedNews; i < endIndex; i++) {
+                const result = allNews[i];
+                const articleElement = document.createElement('div');
+                articleElement.className = 'col-md-4 mb-4 fade-in';
+                articleElement.innerHTML = `
+                    <div class="card h-100">
+                        <img src="${result.image || 'https://via.placeholder.com/300x200'}" class="card-img-top" alt="${result.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200';">
+                        <div class="card-body">
+                            <h5 class="card-title">${result.title}</h5>
+                            <p class="card-text small text-muted">
+                                <img src="https://www.google.com/s2/favicons?domain=${new URL(result.url).hostname}" class="source-icon" alt="${result.source}">
+                                ${result.date} - ${result.source}
+                            </p>
+                            <p class="card-text">${result.body}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="${result.url}" class="btn btn-outline-primary btn-sm" target="_blank">Read More</a>
+                        </div>
+                    </div>
+                `;
+                newsContainer.appendChild(articleElement);
+            }
+
+            displayedNews = endIndex;
+            document.getElementById('loadMore').style.display = displayedNews < allNews.length ? 'block' : 'none';
+        }
     </script>
-    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2037644167417212" crossorigin="anonymous"></script>
 </body>
 </html>
