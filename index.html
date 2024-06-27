@@ -15,15 +15,18 @@
             --card-background: #fff;
             --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         body {
             font-family: 'Roboto', Arial, sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
         }
+
         .container {
-            padding-top: 50px;
+            padding-top: 30px; 
         }
+
         .jumbotron {
             background-color: var(--primary-color);
             color: #fff;
@@ -31,7 +34,9 @@
             margin-bottom: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center; 
         }
+
         .card {
             border: none;
             box-shadow: var(--card-shadow);
@@ -40,48 +45,65 @@
             overflow: hidden;
             background-color: var(--card-background);
         }
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
+        .card-img-top {
+            height: 200px; 
+            object-fit: cover; 
+        }
+
         .card-title {
-            font-size: 20px;
+            font-size: 1.2rem;
             font-weight: bold;
             color: var(--text-color);
         }
+
         .card-text {
             color: var(--secondary-color);
         }
+
         .card-footer {
             background-color: rgba(0, 0, 0, 0.03);
             border-top: none;
         }
+
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             transition: background-color 0.3s, border-color 0.3s;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #0056b3;
         }
+
         .btn-outline-primary {
             color: var(--primary-color);
             border-color: var(--primary-color);
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
+
         .btn-outline-primary:hover {
             background-color: var(--primary-color);
             color: #fff;
         }
+
         .search-input {
             border-radius: 24px;
             padding: 10px 20px;
+            border: 1px solid #ced4da; 
         }
+
         .logo {
             max-width: 200px;
             transition: transform 0.3s;
         }
+
         .logo:hover {
             transform: scale(1.05);
         }
@@ -90,6 +112,7 @@
             border-color: #ff0000;
             transition: background-color 0.3s, border-color 0.3s;
         }
+
         .subscribe-btn:hover {
             background-color: #cc0000;
             border-color: #cc0000;
@@ -101,11 +124,13 @@
             height: 34px;
             margin-left: 20px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -117,6 +142,7 @@
             transition: .4s;
             border-radius: 34px;
         }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -128,38 +154,47 @@
             transition: .4s;
             border-radius: 50%;
         }
+
         input:checked + .slider {
             background-color: #2196F3;
         }
+
         input:checked + .slider:before {
             transform: translateX(26px);
         }
+
         body.dark-mode {
             --background-color: #1a1a1a;
             --text-color: #f0f0f0;
             --card-background: #2c2c2c;
             --card-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
+
         body.dark-mode .jumbotron {
             background-color: #004085;
         }
+
         body.dark-mode .btn-outline-primary {
             color: #4da3ff;
             border-color: #4da3ff;
         }
+
         body.dark-mode .btn-outline-primary:hover {
             background-color: #4da3ff;
             color: #1a1a1a;
         }
+
         .source-icon {
             width: 20px;
             height: 20px;
             margin-right: 5px;
         }
+
         #loadMore {
             display: none;
             margin: 20px auto;
         }
+
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -167,22 +202,31 @@
             display: none;
             z-index: 1000;
         }
+
         .fade-in {
             animation: fadeIn 0.5s;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="jumbotron">
-            <img src="https://raw.githubusercontent.com/OE-LUCIFER/HelpingAI-vortex3b/main/techscout.jpeg" alt="Techscout Logo" class="img-fluid mx-auto d-block mb-4 logo">
-            <h1 class="display-4 text-center mb-4">Explore the Latest News</h1>
-            <p class="lead text-center">InfoHive is your source for up-to-date news on technology, sports, and more.</p>
-            <div class="text-center">
+            <img src="https://raw.githubusercontent.com/OE-LUCIFER/HelpingAI-vortex3b/main/techscout.jpeg"
+                alt="Techscout Logo" class="img-fluid mx-auto d-block mb-4 logo">
+            <h1 class="display-4 mb-4">Explore the Latest News</h1>
+            <p class="lead">InfoHive is your source for up-to-date news on technology, sports, and more.</p>
+            <div>
                 <a href="https://youtube.com/@OEvortex" class="btn btn-primary subscribe-btn" target="_blank">
                     <i class="fab fa-youtube mr-2"></i>Subscribe to OEvortex on YouTube
                 </a>
@@ -192,17 +236,19 @@
                 </label>
             </div>
         </div>
+
         <div class="card mb-4">
             <div class="card-body">
                 <div class="form-row">
                     <div class="col-md-8">
-                        <input type="text" class="form-control search-input" id="searchKeywords" placeholder="Enter keywords" value="Latest AI news">
+                        <input type="text" class="form-control search-input" id="searchKeywords"
+                            placeholder="Enter keywords" value="Latest AI news">
                     </div>
                     <div class="col-md-2">
                         <select id="searchTimeLimit" class="form-control search-input">
-                            <option value="d">Day</option>
-                            <option value="w">Week</option>
-                            <option value="m">Month</option>
+                            <option value="d">Past Day</option>
+                            <option value="w">Past Week</option>
+                            <option value="m">Past Month</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -213,9 +259,11 @@
                 </div>
             </div>
         </div>
+
         <div id="newsContainer" class="row mt-4"></div>
         <button id="loadMore" class="btn btn-primary">Load More</button>
     </div>
+
     <a href="#" class="back-to-top btn btn-primary">
         <i class="fas fa-arrow-up"></i>
     </a>
@@ -228,7 +276,7 @@
         let displayedNews = 0;
         const newsPerPage = 9;
 
-        document.getElementById('darkModeToggle').addEventListener('change', function() {
+        document.getElementById('darkModeToggle').addEventListener('change', function () {
             document.body.classList.toggle('dark-mode', this.checked);
             localStorage.setItem('darkMode', this.checked);
         });
@@ -241,18 +289,18 @@
         });
 
         document.getElementById('searchButton').addEventListener('click', performSearch);
-        document.getElementById('searchKeywords').addEventListener('keypress', function(e) {
+        document.getElementById('searchKeywords').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') performSearch();
         });
 
         document.getElementById('loadMore').addEventListener('click', displayMoreNews);
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             var backToTopButton = document.querySelector('.back-to-top');
             backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
         });
 
-        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+        document.querySelector('.back-to-top').addEventListener('click', function (e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -268,8 +316,8 @@
 
             const queryString = new URLSearchParams({
                 q: searchKeywords,
-                max_results: '100',
-                safesearch: 'off',
+                max_results: '200', 
+                safesearch: 'off', 
                 region: 'wt-wt',
                 timelimit: searchTimeLimit
             }).toString();
@@ -297,21 +345,23 @@
         function displayMoreNews() {
             const newsContainer = document.getElementById('newsContainer');
             const endIndex = Math.min(displayedNews + newsPerPage, allNews.length);
-            
+
             for (let i = displayedNews; i < endIndex; i++) {
                 const result = allNews[i];
                 const articleElement = document.createElement('div');
                 articleElement.className = 'col-md-4 mb-4 fade-in';
                 articleElement.innerHTML = `
                     <div class="card h-100">
-                        <img src="${result.image || 'https://via.placeholder.com/300x200'}" class="card-img-top" alt="${result.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200';">
+                        <a href="${result.url}" target="_blank">
+                            <img src="${result.image || 'https://via.placeholder.com/300x200'}" class="card-img-top" alt="${result.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200';">
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title">${result.title}</h5>
                             <p class="card-text small text-muted">
                                 <img src="https://www.google.com/s2/favicons?domain=${new URL(result.url).hostname}" class="source-icon" alt="${result.source}">
                                 ${result.date} - ${result.source}
                             </p>
-                            <p class="card-text">${result.body}</p>
+                            <p class="card-text">${result.body.length > 100 ? result.body.substring(0, 100) + '...' : result.body}</p> 
                         </div>
                         <div class="card-footer">
                             <a href="${result.url}" class="btn btn-outline-primary btn-sm" target="_blank">Read More</a>
@@ -325,6 +375,8 @@
             document.getElementById('loadMore').style.display = displayedNews < allNews.length ? 'block' : 'none';
         }
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2037644167417212" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2037644167417212"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
